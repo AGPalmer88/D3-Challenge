@@ -6,7 +6,7 @@
     var margin = {
         top: 20,
         right: 40,
-        bottom: 80,
+        bottom: 60,
         left: 100
     };
     
@@ -41,19 +41,20 @@
         /// CREATE SCALE X TO CHART
         //=====================
         var xLinearScale = d3.scaleLinear()
-        .domain([8, d3.max(health, d => d.poverty)])
+        .domain([8.5, d3.max(health, d => d.poverty)])
         .range([0, width]);
 
         /// CREATE SCALE Y TO CHART  
         //=====================      
         var yLinearScale = d3.scaleLinear()
-        .domain([15, d3.max(health, d => d.obesity)])
+        .domain([20, d3.max(health, d => d.obesity)])
         .range([height, 0]);
 
         /// CREATE AXIS
         //=====================
         var yAxis = d3.axisLeft(yLinearScale);
-        var xAxis = d3.axisBottom(xLinearScale);
+        var xAxis = d3.axisBottom(xLinearScale)
+        .ticks(8);
     
         chartGroup.append("g")
                 .attr("transform", `translate(0, ${height})`)
@@ -115,7 +116,7 @@
           
         chartGroup.append("text")
             .attr("transform", "rotate(-90)")
-            .attr("y", 0 - margin.left)
+            .attr("y", 0 - margin.left + 40)
             .attr("x", 0 - (height / 2))
             .attr("dy", "1em")
             .attr("axis-text", "true")
